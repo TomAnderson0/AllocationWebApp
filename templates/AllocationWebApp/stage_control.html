@@ -1,0 +1,124 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Stage Control {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar" style="background-color:rgb(0,83,152)">
+        <div class="back-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:admin-panel' %}" role="button">Back</a>
+        </div>
+
+        <div class="header-bar-header">
+            <h1>Stage Control</h1>
+        </div>
+
+        <div></div> <!-- Filler div for space-between styling -->
+    </div>
+
+    <div class="project-list-wrapper">
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Setup</b> - Account creations, instance allocation</p>
+            </div>
+            {% if instance_stage == 1 %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-dark" role="button"><p style="color:white">Setup</p></a>
+                </div>
+            {% else %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" role="button" onClick="updateStage(1)"><p style="color:black">Setup</p></a>
+                </div>
+            {% endif %}
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Project Submissions</b> - Projects uploaded for the current instance</p>
+            </div>
+            {% if instance_stage == 2 %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-dark" role="button"><p style="color:white">Project Submissions</p></a>
+                </div>
+            {% else %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" role="button" onClick="updateStage(2)"><p style="color:black">Project Submissions</p></a>
+                </div>
+            {% endif %}
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Preference Selection</b> - Students submit preferences</p>
+            </div>
+            {% if instance_stage == 3 %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-dark" role="button"><p style="color:white">Preference Selection</p></a>
+                </div>
+            {% else %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" role="button" onClick="updateStage(3)"><p style="color:black">Preference Selection</p></a>
+                </div>
+            {% endif %}
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Run Algorithm</b> - Run the algorithm and optimise</p>
+            </div>
+            {% if instance_stage == 4 %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-dark" role="button"><p style="color:white">Run Algorithm</p></a>
+                </div>
+            {% else %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" role="button" onClick="updateStage(4)"><p style="color:black">Run Algorithm</p></a>
+                </div>
+            {% endif %}
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Allocations</b> - Finalise and show all allocations</p>
+            </div>
+            {% if instance_stage == 5 %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-dark" role="button"><p style="color:white"></p>Allocations</p></a>
+                </div>
+            {% else %}
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" role="button" onClick="updateStage(5)"><p style="color:black">Allocations</p></a>
+                </div>
+            {% endif %}
+                
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+
+    function updateStage(stage) {
+        $.ajax({ 
+            url: "/stage-control/",
+            type: "POST",
+            data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                new_stage: stage,
+            },
+            success: function(response) {},
+        });
+        location.reload(true);
+    }
+
+</script>
+
+{% endblock javascripts %}

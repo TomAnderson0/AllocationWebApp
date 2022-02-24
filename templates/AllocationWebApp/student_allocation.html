@@ -1,0 +1,60 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Allocation {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+        <h1>My Allocation</h1>
+    </div>
+
+    <div class="header-bar" style="background-color:rgb(0,83,152)">
+        <h1>{{ project.title }}</h1>
+    </div>
+
+    <div class="project-list-wrapper">
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p><b>Description:</b> {{ project.description }}</p>
+            </div>
+        </div>
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p><b>Tags:</b> {{ project.tags }}</p>
+            </div>
+        </div>
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p><b>Supervisor:</b> {{ project.supervisor }}, {% if project.supervisor.email %} {{ project.supervisor.email }} {% else %} no email found {% endif %}</p> 
+            </div>
+        </div>   
+        {% if project.seSuitable == True %}
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Project is SE Suitable</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Project is not SE Suitable</p>
+            </div>
+        </div>     
+        {% endif %} 
+    </div>
+
+    <!-- <div class="project-list-wrapper">
+        <div class="project-wrapper">
+            <div class="project-display">
+                {{ project.title }}
+            </div>
+            <div class="project-display-supervisor">
+                {{ project.supervisor }}
+            </div>
+            <div class="project-links" align="right">
+                <a class="btn btn-light" href="{% url 'AllocationWebApp:student-allocation' project.id %}" role="button">View</a>
+            </div>
+        </div>
+    </div> -->
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} My Projects {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar" style="background-color:rgb(0,83,152)">
+        <h1>My Projects</h1>
+    </div>
+
+    <div class="search-wrapper">
+        <form method="GET" style="display: flex;">
+            <input type="text" name="search-box" value="{{search_input}}" placeholder="Search">
+            <input class="btn btn-light" type="submit" value="Submit">
+        </form>
+        {% if user_type == 'Supervisor' %}
+        <a class="btn btn-light" href="{% url 'AllocationWebApp:supervisor-project-create' %}" role="button">Create Project</a>
+        {% endif %}
+    </div>
+
+    <div class="project-list-wrapper">
+
+        {% for project in projects %}
+            <div class="project-wrapper">
+                <div class="project-display">
+                    {{ project.title }}
+                </div>
+                <div class="project-display-supervisor">
+                    {{ project.supervisor }}
+                </div>
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" href="{% url 'AllocationWebApp:supervisor-project' project.id %}" role="button">View</a>
+                    <a class="btn btn-light" href="{% url 'AllocationWebApp:supervisor-project-edit' project.id %}" role="button">Edit</a>
+                    <a class="btn btn-light" href="{% url 'AllocationWebApp:supervisor-project-delete' project.id %}" role="button">Delete</a>
+                </div>
+                
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock content %}

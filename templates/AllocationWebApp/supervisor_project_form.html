@@ -1,0 +1,41 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Manage Project {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+        <div class="back-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:supervisor-projects' %}" role="button">Back</a>
+        </div>
+
+        {% if create_view %}
+        <div class="header-bar-header">
+            <h1>Create Project</h1>
+        </div>
+        {% else %}
+        <div class="header-bar-header">
+            <h1>Manage Project</h1>
+        </div>
+        {% endif %}
+
+        <div></div> <!-- Filler div for space-between styling -->
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST" action="">
+
+            {% csrf_token %}
+    
+            {{form.as_p}}
+    
+            <input type="submit" class="btn btn-light" value="Submit">
+    
+        </form>
+
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Algorithms {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+        <div class="back-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:admin-panel' %}" role="button">Back</a>
+        </div>
+
+        <div class="header-bar-header">
+            <h1>Algorithms</h1>
+        </div>
+
+        <div></div> <!-- Filler div for space-between styling -->
+
+    </div>
+
+    <div class="project-list-wrapper">
+
+        <div class="project-wrapper-bb">
+            <div class="project-display-nw">
+                <p><b>Algorithm 1</b> - Test</p>
+            </div>
+
+            <div class="project-links" align="right">
+                <a class="btn btn-light" href="{% url 'AllocationWebApp:alg-cmd-line' %}" role="button">Run Alg</a>
+            </div>
+        </div>
+
+    </div>
+
+    {% if output %}
+
+    <div class="header-bar-border-bottom">
+
+        <div class="header-bar-header">
+            <h1>Results</h1>
+        </div>
+
+    </div>
+    
+    <div class="project-list-wrapper">
+
+        {% for entry in output %}
+
+        <div class="project-wrapper-bb">
+            <div class="project-display">
+                {{ entry }}
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+    
+
+{% endblock content %}

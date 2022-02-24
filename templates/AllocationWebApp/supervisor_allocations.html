@@ -1,0 +1,58 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Preferences {% endblock title %}
+
+{% block content %}
+
+    <div class="preferences-favourites">
+        <div class="preferences-list">
+            <!-- Preferences -->
+            <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+                <div class="header-bar-header">
+                    <h1>Project</h1>
+                </div>
+
+            </div>
+
+            <!-- Items -->
+            <div class="project-list-wrapper">
+                {% for allocation in allocations %}
+                    <div class="project-wrapper-bb">
+                        <div class="project-display">
+                            {{ allocation.project.title }}
+                        </div>         
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="vl"></div>
+
+        <div class="favourites-list">
+            <!-- Favourites -->
+            <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+                <div class="header-bar-header">
+                    <h1>Student</h1>
+                </div>
+
+            </div>
+
+            <!-- Items -->
+            <div class="project-list-wrapper">
+                {% for allocation in allocations %}
+                    <div class="project-wrapper-bb">
+                        <div class="project-display">
+                            {{ allocation.student }}
+                        </div>
+                        <div class="project-display">
+                            {{ allocation.student.user.email }}
+                        </div>       
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>  
+
+{% endblock content %}

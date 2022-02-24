@@ -1,0 +1,56 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Project {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+        <div class="back-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:student-allocation' %}" role="button">Back</a>
+        </div>
+
+        <div class="header-bar-header">
+            <h1>{{ project.title }}</h1>
+        </div>
+
+        {% if user_type == 'Student' %}
+        <div class="favourite-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:favourite-post' project.id %}" role="button">Add to Favourites</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <div class="project-list-wrapper">
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Description: {{ project.description }}</p>
+            </div>
+        </div>
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Tags: {{ project.tags }}</p>
+            </div>
+        </div>
+        {% if project.seSuitable == True %}
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Project is SE Suitable</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Project is not SE Suitable</p>
+            </div>
+        </div>     
+        {% endif %} 
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p>Supervisor: {{ project.supervisor }}, {% if project.supervisor.email %} {{ project.supervisor.email }} {% else %} no email found {% endif %}</p> 
+            </div>
+        </div>   
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Admin Panel {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+        <div class="back-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:admin-panel' %}" role="button">Back</a>
+        </div>
+
+        <div class="header-bar-header">
+            <h1>Upload CSV</h1>
+        </div>
+
+        <div></div> <!-- Filler div for space-between styling -->
+
+    </div>
+
+    <div class="project-list-wrapper">
+
+        <div class="project-wrapper-bb">
+
+            <form action="" method="POST" class="ui form" id="upload-file" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-light">Confirm</button>
+            </form>
+                
+        </div>
+
+    </div>
+
+{% endblock content %}

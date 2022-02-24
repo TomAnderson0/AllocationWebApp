@@ -1,0 +1,36 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Student {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+        <div class="back-button">
+            <a class="btn btn-light" href="{% url 'AllocationWebApp:students' %}" role="button">Back</a>
+        </div>
+
+        <div class="header-bar-header">
+            <h1>{{ student }}</h1>
+        </div>
+
+    </div>
+
+    <div class="project-list-wrapper">
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                <p><b>Student GUID:</b> {{ student }}</p>
+            </div>
+        </div>
+        <div class="project-wrapper">
+            <div class="project-display-bb">
+                {% if student.user.email %}
+                <p><b>Student Email:</b> {{ student.user.email }}</p>
+                {% else %}
+                <p>No Email found for user: {{ student }}</p>
+                {% endif %}
+            </div>
+        </div>  
+    </div>
+
+{% endblock content %}

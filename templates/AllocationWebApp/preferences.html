@@ -1,0 +1,122 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Preferences {% endblock title %}
+
+{% block content %}
+
+    <div class="preferences-favourites">
+        <div class="preferences-list">
+            <!-- Preferences -->
+            <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+                <div class="back-button">
+                    <a class="btn btn-light" href="{% url 'AllocationWebApp:projects' %}" role="button">Back</a>
+                </div>
+
+                <div class="header-bar-header">
+                    <h1>Preferences</h1>
+                </div>
+
+            </div>
+
+            <!-- Items -->
+            <div class="project-list-wrapper">
+                <ul id="sortable1" class="connectedSortable">
+                    {% for preference in preferences %}
+                        {% if preference != None %}
+                            <li class="ui-state-default">
+                                <div class="project-wrapper-bb">
+                                    <div class="project-display">
+                                        <p class="project-title">{{ preference.title }}</p>
+                                    </div>
+                                    <div class="project-display">
+                                        {{ preference.supervisor }}
+                                    </div>
+                                    <div class="project-links" align="right">
+                                        <a class="btn btn-light" href="{% url 'AllocationWebApp:preference-project' preference.id %}" role="button">View</a>
+                                        <a class="btn btn-light" href="{% url 'AllocationWebApp:favourite-post' preference.id %}" role="button">Remove</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="vl"></div>
+
+        <div class="favourites-list">
+            <!-- Favourites -->
+            <div class="header-bar-border-bottom" style="background-color:rgb(0,83,152)">
+
+                <div class="header-bar-header">
+                    <h1>Favourites</h1>
+                </div>
+
+            </div>
+
+            <!-- Items -->
+            <div class="project-list-wrapper">
+                <ul id="sortable2" class="connectedSortable">
+                    {% for favourite in favourite_posts %}
+                        <li class="ui-state-default">
+                            <div class="project-wrapper-bb">
+                                <div class="project-display">
+                                    <p class="project-title">{{ favourite.title }}</p>
+                                </div>
+                                <div class="project-display">
+                                    {{ favourite.supervisor }}
+                                </div>
+                                <div class="project-links" align="right">
+                                    <a class="btn btn-light" href="{% url 'AllocationWebApp:preference-project' favourite.id %}" role="button">View</a>
+                                    <a class="btn btn-light" href="{% url 'AllocationWebApp:favourite-post' favourite.id %}" role="button">Remove</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>  
+
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    $(function() {
+        $("#sortable1, #sortable2").sortable({
+            connectWith: ".connectedSortable",
+            update: function( event, ui) {
+
+                var projects = document.getElementById('sortable1').getElementsByClassName('project-title');
+                var favourites = document.getElementById('sortable2').getElementsByClassName('project-title');
+                var projects_order = '';
+                var favourites_order = '';
+
+                for(var i = 0; i < projects.length; i++) {
+                    projects_order += projects[i].innerText;
+                    projects_order += '.';
+                }
+                for(var i = 0; i < favourites.length; i++) {
+                    favourites_order += favourites[i].innerText;
+                    favourites_order += '.';
+                }
+
+                $.ajax({
+                    async: false, 
+                    url: "/preferences/",
+                    type: "POST",
+                    data: {
+                        async: false,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        project_list: projects_order,
+                        favourite_list: favourites_order
+                    },
+                    success: function(response) {}
+                });
+            }
+        }).disableSelection();
+    });
+</script>
+{% endblock javascripts %}

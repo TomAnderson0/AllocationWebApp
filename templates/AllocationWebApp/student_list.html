@@ -1,0 +1,35 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Students {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar" style="background-color:rgb(0,83,152)">
+        <h1>Students</h1>
+    </div>
+
+    <div class="search-wrapper">
+        <form method="GET" style="display: flex;">
+            <input type="text" name="search-box" value="{{search_input}}" placeholder="Search">
+            <input class="btn btn-light" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div class="project-list-wrapper">
+
+        {% for student in students %}
+            <div class="project-wrapper">
+                <div class="project-display">
+                    {{ student }}
+                </div>
+                <div class="project-links" align="right">
+                    <a class="btn btn-light" href="{% url 'AllocationWebApp:student-view' student.id %}" role="button">View</a>
+                    <a class="btn btn-light" href="{% url 'AllocationWebApp:user-delete' student.id %}" role="button">Delete</a>
+                </div>
+                
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Login {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="header-bar" style="background-color:rgb(0,83,152)">
+        <h1>Login</h1>
+    </div>
+
+    <div class="card-body">
+        
+        <form method="POST" action="">
+
+            {% csrf_token %}
+
+            {{form.as_p}}
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

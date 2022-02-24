@@ -1,0 +1,55 @@
+{% extends 'AllocationWebApp/layouts/base.html' %}
+
+{% block title %} Admin Panel {% endblock title %}
+
+{% block content %}
+
+    <div class="header-bar" style="background-color:rgb(0,83,152)">
+        <h1>Admin Panel</h1>
+    </div>
+
+    <div class="project-list-wrapper">
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Stage Control</b> - Change the current stage of the Allocation process</p>
+            </div>
+            <div class="project-links" align="right">
+                <a class="btn btn-light" href="{% url 'AllocationWebApp:stage-control' %}" role="button">Stage Control</a>
+            </div>
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>Algorithms</b> - Choose which algorithm to run on the student preference list</p>
+            </div>
+            <div class="project-links" align="right">
+                <a class="btn btn-light" href="{% url 'AllocationWebApp:algorithms' %}" role="button">Algorithms</a>
+            </div>
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>User Upload</b> - Create an individual student/supervisor account</p>
+            </div>
+            <div class="project-links" align="right">
+                <a class="btn btn-light" href="{% url 'AllocationWebApp:register' %}" role="button">User Upload</a>
+            </div>
+                
+        </div>
+
+        <div class="project-wrapper">
+            <div class="project-display-nw">
+                <p><b>CSV Upload</b> - Create a large amount of users via file upload</p>
+            </div>
+            <div class="project-links" align="right">
+                <a class="btn btn-light" href="{% url 'AllocationWebApp:csv-upload' %}" role="button">CSV Upload</a>
+            </div>
+                
+        </div>
+
+    </div>
+
+{% endblock content %}
